@@ -15,7 +15,7 @@ export function RootRoute() {
     if (pathname === RoutePath.ROOT) {
       navigate(RoutePath.APPLICATIONS);
     }
-  }, [pathname]);
+  }, [pathname, navigate]);
 
   return (
     <div className={cx("flex", "gap-10")}>
