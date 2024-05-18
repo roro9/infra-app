@@ -1,12 +1,14 @@
-import {
-  createBrowserRouter,
-  RouterProvider
-} from "react-router-dom";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { RoutePath } from "./constants";
-import { ApplicationsRoute, ComingSoonRoute, RootRoute, UnknownRoute } from "./routes";
+import {
+  ApplicationsRoute,
+  ComingSoonRoute,
+  RootRoute,
+  UnknownRoute,
+} from "./routes";
 
 function App() {
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -15,35 +17,33 @@ function App() {
       children: [
         {
           path: RoutePath.APPLICATIONS,
-          element: <ApplicationsRoute />
+          element: <ApplicationsRoute />,
         },
         {
           path: RoutePath.CONNECTIONS,
-          element: <ComingSoonRoute />
+          element: <ComingSoonRoute />,
         },
         {
           path: RoutePath.COST,
-          element: <ComingSoonRoute />
+          element: <ComingSoonRoute />,
         },
         {
           path: RoutePath.SECURITY,
-          element: <ComingSoonRoute />
+          element: <ComingSoonRoute />,
         },
         {
           path: RoutePath.ADMIN,
-          element: <ComingSoonRoute />
+          element: <ComingSoonRoute />,
         },
         {
           path: RoutePath.DOCS,
-          element: <ComingSoonRoute />
+          element: <ComingSoonRoute />,
         },
-      ]
+      ],
     },
   ]);
 
-  return (
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

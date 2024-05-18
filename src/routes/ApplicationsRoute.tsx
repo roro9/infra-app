@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
+import React from "react";
 
 export function ApplicationsRoute() {
-  return <div>Application Route</div>
+  return <div>Application Route</div>;
 }
