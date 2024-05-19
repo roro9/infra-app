@@ -8,7 +8,13 @@ export function ApplicationsRoute() {
 
   return (
     <div className="px-10">
-      {!app ? <div>Select an app</div> : <ApplicationPageContent app={app} />}
+      {!app ? (
+        <div>Select an app</div>
+      ) : (
+        <React.Fragment key={app.id}>
+          <ApplicationPageContent app={app} />
+        </React.Fragment>
+      )}
     </div>
   );
 }
