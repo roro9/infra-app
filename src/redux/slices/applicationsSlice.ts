@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface IApplication {
+export interface IApplication {
   id: number;
   name: string;
   status: "deployed" | "uninstalled";
