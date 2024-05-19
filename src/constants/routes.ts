@@ -10,7 +10,7 @@ export enum Route {
 
 export enum RoutePath {
   ROOT = "/",
-  APPLICATIONS = "/applications",
+  APPLICATIONS = "/application",
   CONNECTIONS = "/connections",
   COST = "/cost",
   SECURITY = "/security",
