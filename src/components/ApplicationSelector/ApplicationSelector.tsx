@@ -24,7 +24,7 @@ export function ApplicationSelector() {
         navigate(RoutePath.APPLICATIONS);
       }
     }
-  }, [id]);
+  }, [id, dispatch, navigate, options]);
 
   return (
     <div>

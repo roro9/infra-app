@@ -30,7 +30,7 @@ export const useRouteSetup = () => {
         dispatch(updateApplications(data));
       }
     }
-  }, [data]);
+  }, [data, path, dispatch]);
 
   // console.log({ data });
 
