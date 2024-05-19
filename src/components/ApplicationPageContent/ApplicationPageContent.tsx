@@ -30,7 +30,9 @@ export function ApplicationPageContent({ app }: { app: IApplication }) {
       />
 
       <div className="my-6">
-        {pageView === "overview" && <Overview app={app} />}
+        {pageView === "overview" && (
+          <Overview app={app} setView={(newView) => setPageView(newView)} />
+        )}
         {pageView === "env" && <Environment />}
         {pageView === "alerts" && <Alerts />}
         {pageView === "events" && <Events />}
