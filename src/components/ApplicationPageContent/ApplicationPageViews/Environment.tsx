@@ -97,7 +97,7 @@ export function Environment({ app }: { app: IApplication }) {
       `APP_ID:${app.id}__ENV_VARIABLES`,
       JSON.stringify(envVariables)
     );
-  }, [envVariables]);
+  }, [envVariables, app.id]);
 
   return (
     <>
