@@ -23,6 +23,8 @@ export function ApplicationSelector() {
       } else {
         navigate(RoutePath.APPLICATIONS);
       }
+    } else {
+      dispatch(updateAppId(null));
     }
   }, [id, dispatch, navigate, options]);
 
