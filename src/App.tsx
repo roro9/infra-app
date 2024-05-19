@@ -17,7 +17,16 @@ function App() {
       children: [
         {
           path: RoutePath.APPLICATIONS,
-          element: <ApplicationsRoute />,
+          children: [
+            {
+              index: true,
+              element: <ApplicationsRoute />,
+            },
+            {
+              path: ":id",
+              element: <ApplicationsRoute />,
+            },
+          ],
         },
         {
           path: RoutePath.CONNECTIONS,
