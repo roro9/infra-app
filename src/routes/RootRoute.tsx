@@ -33,8 +33,8 @@ export function RootRoute() {
   return (
     <div className={cx("flex")}>
       <Sidebar />
-      <div className="grow">
-        <div>
+      <div className="grow bg-primary-gray-page-bg">
+        <div className="max-h-screen overflow-auto relative">
           {error ? (
             <div>Error setting up</div>
           ) : isPending ? (
