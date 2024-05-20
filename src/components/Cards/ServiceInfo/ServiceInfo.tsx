@@ -1,31 +1,31 @@
-import { ReactNode } from "react";
 import { IApplication } from "../../../redux/slices/applicationsSlice";
 import { BaseCard } from "../BaseCard";
 import React from "react";
-
-function Detail({ label, value }: { label: string; value?: ReactNode }) {
-  return (
-    <div className="inline-block">
-      <div>{label}</div>
-      <div>{value}</div>
-    </div>
-  );
-}
+import { CurrentVersion } from "./CurrentVersion";
+import { DesiredVersion } from "./DesiredVersion";
+import { Button } from "@mui/material";
+import { getTimestampLabel } from "../../../utils";
 
 export function ServiceInfo({ app }: { app: IApplication }) {
-  const { version, desiredVersion, updatedAt } = app;
+  const { updatedAt } = app;
+
   return (
     <BaseCard title="Service info" canCollapse>
-      <div className="flex items-start gap-10">
-        <Detail
-          label="Current Version"
-          value={version === desiredVersion ? "In Sync" : version}
-        />
-        <Detail label="Desired Version" value={desiredVersion} />
+      <div className="flex items-start gap-40">
+        <CurrentVersion app={app} />
+        <DesiredVersion app={app} />
       </div>
-      <div className="flex items-center justify-between mt-8">
-        <div>Deploy</div>
-        <div>Last updated at {updatedAt}</div>
+      <div className="flex items-center justify-between mt-10">
+        <Button
+          variant="contained"
+          disableElevation
+          sx={{ background: "#6E27D5" }}
+        >
+          Deploy
+        </Button>
+        <div className="text-xs	font-medium text-primary-gray-timesstamp">
+          Last updated {getTimestampLabel(Number(updatedAt))}
+        </div>
       </div>
     </BaseCard>
   );

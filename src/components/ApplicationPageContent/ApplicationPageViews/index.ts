@@ -1,0 +1,1 @@
+export { ApplicationPageView } from "./ApplicationPageView";

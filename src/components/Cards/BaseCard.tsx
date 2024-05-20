@@ -1,6 +1,8 @@
 import { ReactNode, useState } from "react";
 import cx from "classnames";
 import React from "react";
+import { IconButton } from "@mui/material";
+import { CaretDownIcon } from "../../icons";
 
 export function BaseCard({
   children,
@@ -20,7 +22,7 @@ export function BaseCard({
   return (
     <div
       className={cx(
-        "rounded-md",
+        "rounded-lg",
         "p-4",
         "border border-primary-gray-border",
         "bg-white",
@@ -28,12 +30,18 @@ export function BaseCard({
       )}
     >
       <div className="flex items-center justify-between">
-        {title && <div className="text-gray-500 font-medium mb-4">{title}</div>}
+        {title && <div className="text-[#595959] font-bold mb-4">{title}</div>}
 
         {canCollapse && (
-          <div onClick={() => setCollapse((prev) => !prev)}>
-            {collapse ? "Expand" : "Collapse"}
-          </div>
+          <IconButton
+            size="small"
+            onClick={() => setCollapse((prev) => !prev)}
+            className={cx("transition", {
+              "scale-[-1]": !collapse,
+            })}
+          >
+            <CaretDownIcon />
+          </IconButton>
         )}
 
         {titleRight && <div>{titleRight}</div>}
