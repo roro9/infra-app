@@ -39,7 +39,7 @@ export function ApplicationSelector() {
     if (options.length && !id) {
       navigate(`${RoutePath.APPLICATIONS}/${options[0].id}`);
     }
-  }, [options, id]);
+  }, [options, id, navigate]);
 
   return (
     <LabelWrapper label="Applications">

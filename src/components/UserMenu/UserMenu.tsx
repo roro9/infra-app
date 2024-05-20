@@ -34,7 +34,13 @@ export function UserMenu({ user }: { user: IUser }) {
         <span className="text-base">
           {firstName} {lastName}
         </span>
-        <span className="ml-1 text-black/5">
+        <span
+          className={cx("ml-1", "transition", {
+            "scale-[-1]": open,
+            "text-black/95": open,
+            "text-black/5": !open,
+          })}
+        >
           <CaretDownIcon />
         </span>
       </IconButton>
