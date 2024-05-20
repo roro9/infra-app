@@ -14,6 +14,7 @@ module.exports = {
           },
           gray: {
             "page-bg": "#F8F8F8",
+            border: "#EBEBEB",
           },
         },
       },

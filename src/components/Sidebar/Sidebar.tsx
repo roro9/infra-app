@@ -26,7 +26,6 @@ export function Sidebar() {
         "bg-primary-purple",
         "text-white",
         "h-screen",
-        "border-r",
         "flex flex-col",
         "overflow-hidden",
         "transition-all",

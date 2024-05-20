@@ -14,8 +14,6 @@ export function RootRoute() {
 
   const { error, isPending } = useRouteSetup();
 
-  // console.log({ error, isPending });
-
   const appBarPrimaryControlToRender = useMemo((): undefined | JSX.Element => {
     if (pathname.includes(RoutePath.APPLICATIONS)) {
       return <ApplicationSelector />;
@@ -34,7 +32,7 @@ export function RootRoute() {
     <div className={cx("flex")}>
       <Sidebar />
       <div className="grow bg-primary-gray-page-bg">
-        <div className="max-h-screen overflow-auto relative">
+        <div className="min-h-screen max-h-screen overflow-auto relative">
           {error ? (
             <div>Error setting up</div>
           ) : isPending ? (
