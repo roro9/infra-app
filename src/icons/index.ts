@@ -1,9 +1,15 @@
+export { AlertIcon } from "./AlertIcon";
 export { AppsIcon } from "./AppsIcon";
+export { BuildIcon } from "./BuildIcon";
+export { CaretDownIcon } from "./CaretDownIcon";
 export { ConnectionsIcon } from "./ConnectionsIcon";
 export { DocsIcon } from "./DocsIcon";
 export { DoubleArrowLeftIcon } from "./DoubleArrowLeftIcon";
 export { KapstanIcon } from "./KapstanIcon";
+export { MenuIcon } from "./MenuIcon";
 export { MoneyIcon } from "./MoneyIcon";
+export { MonitorIcon } from "./MonitorIcon";
 export { ShieldIcon } from "./ShieldIcon";
+export { StatusRoundIcon } from "./StatusRoundIcon";
+export { TimeIcon } from "./TimeIcon";
 export { UserIcon } from "./UserIcon";
-export { CaretDownIcon } from "./CaretDownIcon";

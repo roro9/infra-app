@@ -18,7 +18,15 @@ export function BaseCard({
   const [collapse, setCollapse] = useState(false);
 
   return (
-    <div className={cx("rounded-md", "p-4", "border", className)}>
+    <div
+      className={cx(
+        "rounded-md",
+        "p-4",
+        "border border-primary-gray-border",
+        "bg-white",
+        className
+      )}
+    >
       <div className="flex items-center justify-between">
         {title && <div className="text-gray-500 font-medium mb-4">{title}</div>}
 

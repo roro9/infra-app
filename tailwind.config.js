@@ -16,6 +16,18 @@ module.exports = {
             "page-bg": "#F8F8F8",
             border: "#EBEBEB",
           },
+          green: {
+            DEFAULT: "#00B88C",
+          },
+          yellow: {
+            DEFAULT: "#F39C12",
+          },
+          red: {
+            DEFAULT: "#E91F04",
+          },
+          pink: {
+            DEFAULT: "#C9A0DC",
+          },
         },
       },
     },
