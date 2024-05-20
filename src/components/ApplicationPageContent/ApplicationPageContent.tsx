@@ -7,22 +7,16 @@ import { Environment } from "./ApplicationPageViews/Environment";
 import { Alerts } from "./ApplicationPageViews/Alerts";
 import { Events } from "./ApplicationPageViews/Events";
 import React from "react";
+import { ApplicationPageContentHeader } from "./ApplicationPageContentHeader";
 
 export function ApplicationPageContent({ app }: { app: IApplication }) {
   const [pageView, setPageView] = useState<View>("overview");
 
   console.log({ pageView });
 
-  const { name, status } = app;
-
   return (
     <div>
-      <div className="flex my-4">
-        <div>{name}</div>
-        <div className="grow" />
-        <div>{status}</div>
-        <div className="ml-2">Menu</div>
-      </div>
+      <ApplicationPageContentHeader app={app} />
 
       <ApplicationPageViewSelector
         value={pageView}
