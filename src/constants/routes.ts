@@ -28,6 +28,7 @@ export interface IRouteMeta {
   displayName: string;
   path: RoutePath;
   type: RouteType;
+  isBeta?: boolean;
 }
 
 export const RouteMetaMap: {
@@ -57,6 +58,7 @@ export const RouteMetaMap: {
     displayName: "Security",
     path: RoutePath.SECURITY,
     type: RouteType.PRIMARY,
+    isBeta: true,
   },
   ADMIN: {
     displayName: "Admin",
