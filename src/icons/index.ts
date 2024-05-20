@@ -6,3 +6,4 @@ export { KapstanIcon } from "./KapstanIcon";
 export { MoneyIcon } from "./MoneyIcon";
 export { ShieldIcon } from "./ShieldIcon";
 export { UserIcon } from "./UserIcon";
+export { CaretDownIcon } from "./CaretDownIcon";
