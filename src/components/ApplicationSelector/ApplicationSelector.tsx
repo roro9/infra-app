@@ -35,7 +35,6 @@ export function ApplicationSelector() {
 
   // auto select first app when no id in url
   React.useEffect(() => {
-    console.log({ options, id });
     if (options.length && !id) {
       navigate(`${RoutePath.APPLICATIONS}/${options[0].id}`);
     }

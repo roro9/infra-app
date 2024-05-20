@@ -2,6 +2,7 @@ export { AlertIcon } from "./AlertIcon";
 export { AppsIcon } from "./AppsIcon";
 export { BuildIcon } from "./BuildIcon";
 export { CaretDownIcon } from "./CaretDownIcon";
+export { CheckIcon } from "./CheckIcon";
 export { ConnectionsIcon } from "./ConnectionsIcon";
 export { DocsIcon } from "./DocsIcon";
 export { DoubleArrowLeftIcon } from "./DoubleArrowLeftIcon";

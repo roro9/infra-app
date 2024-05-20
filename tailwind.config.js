@@ -15,6 +15,7 @@ module.exports = {
           gray: {
             "page-bg": "#F8F8F8",
             border: "#EBEBEB",
+            timesstamp: "#595959",
           },
           green: {
             DEFAULT: "#00B88C",
