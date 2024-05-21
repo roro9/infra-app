@@ -10,13 +10,11 @@ export function SystemMetrics() {
   return (
     <BaseCard title="System metrics">
       <div>
-        <div>
-          <MetricSelector
-            value={view}
-            setValue={(newValue) => setView(newValue)}
-          />
-        </div>
-        <div>
+        <MetricSelector
+          value={view}
+          setValue={(newValue) => setView(newValue)}
+        />
+        <div className="mt-2">
           {view === "cpu" && <CpuView />}
           {view === "memory" && <MemoryView />}
         </div>
