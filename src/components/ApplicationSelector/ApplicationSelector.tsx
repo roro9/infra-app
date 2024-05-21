@@ -17,8 +17,8 @@ export function ApplicationSelector() {
 
   const options = useAppState((s) => s.applications);
 
-  // Sync application id in redux  statewith id in url
-  // If not a valid id, navigate to /applications and clear redux state
+  // Sync application id in redux state with the id in url.
+  // If no valid id in url, navigate to /applications and clear redux state
   React.useEffect(() => {
     if (id && options.length) {
       const numericId = Number(id);
@@ -33,7 +33,7 @@ export function ApplicationSelector() {
     }
   }, [id, dispatch, navigate, options]);
 
-  // auto select first app when no id in url
+  // select the first app when no id in the url
   React.useEffect(() => {
     if (options.length && !id) {
       navigate(`${RoutePath.APPLICATIONS}/${options[0].id}`);
@@ -67,7 +67,6 @@ export function ApplicationSelector() {
         <MenuItem value="" style={{ display: "none" }}>
           Select an application
         </MenuItem>
-
         {options.map((o) => (
           <MenuItem key={o.id} value={String(o.id)}>
             {o.name}

@@ -1,8 +1,8 @@
 import { IconButton } from "@mui/material";
-import { IApplication } from "../../redux/slices/applicationsSlice";
 import { MenuIcon } from "../../icons";
 import { StatusBadge } from "../StatusBadge";
 import React from "react";
+import { IApplication } from "../../interfaces";
 
 export function ApplicationPageContentHeader({ app }: { app: IApplication }) {
   const { name, status } = app;

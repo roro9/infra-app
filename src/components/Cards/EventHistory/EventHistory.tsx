@@ -1,26 +1,10 @@
 import { AppQueryPath, useAppQuery } from "../../../hooks";
-import { IApplication } from "../../../redux/slices/applicationsSlice";
+import { IApplication } from "../../../interfaces";
+import { IApplicationEvent } from "../../../interfaces/applications.interfaces";
 import { BaseCard } from "../BaseCard";
-import React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow, { tableRowClasses } from "@mui/material/TableRow";
-import { tableCellClasses } from "@mui/material/TableCell";
-import { Button } from "@mui/material";
-import { StatusBadge } from "../../StatusBadge";
-import { getTimestampLabel } from "../../../utils";
 import { EventHistoryState } from "./EventHistoryState";
-
-export interface IEvent {
-  id: number;
-  event: string;
-  status: "successful" | "failed" | "in_progress";
-  version: string;
-  timestamp: string;
-  applicationId: string;
-}
+import { EventHistoryTable } from "./EventHistoryTable";
+import React from "react";
 
 export function EventHistory({
   app,
@@ -33,13 +17,13 @@ export function EventHistory({
     path: AppQueryPath.EVENT_HISTORY,
   });
 
-  const eventsData = data as undefined | IEvent[];
+  const eventsData = data as undefined | IApplicationEvent[];
 
-  const renderEvents: IEvent[] = (eventsData || [])
+  const allEvents: IApplicationEvent[] = (eventsData || [])
     .filter((e) => Number(e.applicationId) === app.id)
     .sort((a, b) => Number(a.timestamp) - Number(b.timestamp));
 
-  const topEventsToRender = renderEvents.slice(0, 4);
+  const tableEvents = allEvents.slice(0, 4);
 
   return (
     <BaseCard title="Event History">
@@ -47,72 +31,17 @@ export function EventHistory({
         <EventHistoryState type="error" />
       ) : isPending ? (
         <EventHistoryState type="is-loading" />
-      ) : renderEvents.length === 0 ? (
+      ) : allEvents.length === 0 ? (
         <EventHistoryState type="no-data" />
       ) : (
-        <div>
-          <Table
-            sx={{
-              [`& .${tableRowClasses.root}`]: {
-                height: 50,
-              },
-              [`& .${tableCellClasses.root}`]: {
-                borderColor: "#EBEBEB",
-                color: "#595959",
-                fontSize: 13,
-                fontWeight: 500,
-              },
-            }}
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  sx={{ fontWeight: `700 !important`, pt: "6px !important" }}
-                >
-                  Event
-                </TableCell>
-                <TableCell
-                  align="right"
-                  sx={{ fontWeight: `700 !important`, pt: "6px !important" }}
-                >
-                  Version
-                </TableCell>
-                <TableCell
-                  align="right"
-                  sx={{ fontWeight: `700 !important`, pt: "6px !important" }}
-                >
-                  Status
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {topEventsToRender.map((r) => (
-                <TableRow key={r.id}>
-                  <TableCell component="th" scope="row">
-                    <div>{r.event}</div>
-                    <div className="font-xs text-black/45">
-                      {getTimestampLabel(Number(r.timestamp))}
-                    </div>
-                  </TableCell>
-                  <TableCell align="right">{r.version}</TableCell>
-                  <TableCell align="right">
-                    <StatusBadge status={r.status} />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-
-          {topEventsToRender.length < renderEvents.length && (
-            <Button
-              sx={{ textTransform: "none", mt: 4, textDecoration: "underline" }}
-              variant="text"
-              onClick={switchToEventsView}
-            >
-              View More
-            </Button>
-          )}
-        </div>
+        <EventHistoryTable
+          tableEvents={tableEvents}
+          handleClickViewMoreButton={
+            tableEvents.length < allEvents.length
+              ? switchToEventsView
+              : undefined
+          }
+        />
       )}
     </BaseCard>
   );

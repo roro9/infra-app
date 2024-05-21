@@ -7,7 +7,6 @@ export enum AppQueryPath {
   EVENT_HISTORY = "TYjDIe/eventhistory",
 }
 
-// try to implement generic type
 export const useAppQuery = ({ path }: { path: null | AppQueryPath }) => {
   const BASE_URL = new URL("/", "https://retoolapi.dev");
   const queryUrl = new URL(path || "", BASE_URL);

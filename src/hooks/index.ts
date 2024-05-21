@@ -1,3 +1,4 @@
-export { useAppQuery, AppQueryPath } from "./useAppQuery";
-export { useRouteSetup } from "./useRouteSetup";
 export * from "./reduxStateHooks";
+export { useAppBarControlForRoute } from "./useAppBarControlForRoute";
+export { AppQueryPath, useAppQuery } from "./useAppQuery";
+export { useRouteSetup } from "./useRouteSetup";

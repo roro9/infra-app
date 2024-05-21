@@ -1,56 +1,18 @@
 import React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { StatusRoundIcon } from "../../icons";
 import {
-  AlertIcon,
-  BuildIcon,
-  MonitorIcon,
-  StatusRoundIcon,
-  TimeIcon,
-} from "../../icons";
-
-export type View = "overview" | "env" | "alerts" | "events";
-
-interface IView {
-  id: View;
-  label: string;
-  IconComponent: JSX.Element;
-  showNotification?: boolean;
-}
-
-const ViewMeta: Record<View, IView> = {
-  overview: {
-    id: "overview",
-    label: "Overview",
-    IconComponent: <MonitorIcon />,
-  },
-  env: {
-    id: "env",
-    label: "Environment Variables",
-    IconComponent: <BuildIcon />,
-  },
-  alerts: {
-    id: "alerts",
-    label: "Alerts",
-    IconComponent: <AlertIcon />,
-    showNotification: true,
-  },
-  events: { id: "events", label: "Event History", IconComponent: <TimeIcon /> },
-};
-
-const ALL_VIEWS: IView[] = [
-  ViewMeta.overview,
-  ViewMeta.env,
-  ViewMeta.alerts,
-  ViewMeta.events,
-];
+  ALL_APPLICATION_PAGE_VIEWS,
+  ApplicationPageView,
+} from "../../interfaces";
 
 export function ApplicationPageViewSelector({
   value,
   setValue,
 }: {
-  value: View;
-  setValue: (newValue: View) => void;
+  value: ApplicationPageView;
+  setValue: (newValue: ApplicationPageView) => void;
 }) {
   return (
     <Tabs
@@ -63,7 +25,7 @@ export function ApplicationPageViewSelector({
       }}
       textColor="inherit"
     >
-      {ALL_VIEWS.map((v) => (
+      {ALL_APPLICATION_PAGE_VIEWS.map((v) => (
         <Tab
           key={v.id}
           value={v.id}

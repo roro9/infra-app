@@ -1,4 +1,4 @@
-import { IApplication } from "../../../redux/slices/applicationsSlice";
+import { IApplication } from "../../../interfaces";
 import { LabelWrapper } from "../../LabelWrapper";
 import { getRenderValue } from "./CurrentVersion";
 import React from "react";

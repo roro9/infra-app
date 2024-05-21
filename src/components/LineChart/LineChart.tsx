@@ -76,7 +76,7 @@ export function LineChart({
       },
       tooltip: {
         dateTimeLabelFormats: {
-          millisecond: "%e %b %l:%M %p",
+          millisecond: "%e %b %l:%M %p", // partially incorrect (not multiplying with *1000 over here for now, whereas doing it for x axis labels)
         },
         headerFormat:
           '<div style="width: 150px; margin-bottom: 5px;"><span style="font-size: 1em; font-weight: 500;">{point.key}</span></div>',
@@ -86,8 +86,6 @@ export function LineChart({
     }),
     [series, titleText]
   );
-
-  // TODO - tooltip and x axis timestamps not matching....
 
   return (
     <>

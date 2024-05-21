@@ -1,14 +1,13 @@
 import React from "react";
 import { EventHistory, ServiceInfo, SystemMetrics } from "../../Cards";
-import { IApplication } from "../../../redux/slices/applicationsSlice";
-import { View } from "../../ApplicationPageViewTabs/ApplicationPageViewSelector";
+import { ApplicationPageView, IApplication } from "../../../interfaces";
 
 export function Overview({
   app,
   setView,
 }: {
   app: IApplication;
-  setView: (newView: View) => void;
+  setView: (newView: ApplicationPageView) => void;
 }) {
   return (
     <div className="[&>div]:mb-4">

@@ -1,10 +1,10 @@
-import { IApplication } from "../../../redux/slices/applicationsSlice";
 import { BaseCard } from "../BaseCard";
 import React from "react";
 import { CurrentVersion } from "./CurrentVersion";
 import { DesiredVersion } from "./DesiredVersion";
 import { Button } from "@mui/material";
 import { getTimestampLabel } from "../../../utils";
+import { IApplication } from "../../../interfaces";
 
 export function ServiceInfo({ app }: { app: IApplication }) {
   const { updatedAt } = app;

@@ -1,10 +1,10 @@
 import { StatusRoundIcon } from "../icons";
-import { IApplication } from "../redux/slices/applicationsSlice";
 import cx from "classnames";
 import React from "react";
-import { IEvent } from "./Cards/EventHistory/EventHistory";
+import { IApplicationEvent } from "../interfaces/applications.interfaces";
+import { IApplication } from "../interfaces";
 
-type Status = IEvent["status"] | IApplication["status"];
+type Status = IApplicationEvent["status"] | IApplication["status"];
 
 const statusTextMap: Record<Status, string> = {
   deployed: "Deployed",
