@@ -11,7 +11,7 @@ const statusTextMap: Record<Status, string> = {
   uninstalled: "Un-installed",
   successful: "Successful",
   failed: "Failed",
-  inprogress: "In Progress",
+  in_progress: "In Progress",
 };
 
 const colorClassMap: Record<Status, string> = {
@@ -19,7 +19,7 @@ const colorClassMap: Record<Status, string> = {
   uninstalled: "text-primary-pink border-primary-pink bg-primary-pink/5",
   successful: "text-primary-green border-primary-green bg-primary-green/5",
   failed: "text-primary-red border-primary-red bg-primary-red/5",
-  inprogress: "text-primary-yellow border-primary-yellow bg-primary-yellow/5",
+  in_progress: "text-primary-yellow border-primary-yellow bg-primary-yellow/5",
 };
 
 export function StatusBadge({ status }: { status: Status }) {
@@ -36,7 +36,7 @@ export function StatusBadge({ status }: { status: Status }) {
   return (
     <div className={classes}>
       <StatusRoundIcon />
-      <span>{statusTextMap[status]}</span>
+      <span>{statusTextMap[status] || status}</span>
     </div>
   );
 }

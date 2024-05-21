@@ -15,7 +15,7 @@ import { getTimestampLabel } from "../../../utils";
 export interface IEvent {
   id: number;
   event: string;
-  status: "successful" | "failed" | "inprogress";
+  status: "successful" | "failed" | "in_progress";
   version: string;
   timestamp: string;
   applicationId: string;
@@ -36,7 +36,7 @@ export function EventHistory({
 
   const renderEvents: IEvent[] = (eventsData || [])
     .filter((e) => Number(e.applicationId) === app.id)
-    .sort((a, b) => Number(b.timestamp) - Number(a.timestamp));
+    .sort((a, b) => Number(a.timestamp) - Number(b.timestamp));
 
   const topEventsToRender = renderEvents.slice(0, 4);
 
