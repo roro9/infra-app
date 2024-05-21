@@ -8,6 +8,6 @@ export const getTimestampLabel = (timestamp: EpochTimeStamp): string => {
   } else if (hoursDifference === 1) {
     return "1 hour ago";
   } else {
-    return `${hoursDifference} hours ago`;
+    return `${Math.abs(hoursDifference)} hours ago`;
   }
 };

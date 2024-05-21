@@ -10,6 +10,7 @@ import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { Button } from "@mui/material";
 import { StatusBadge } from "../../StatusBadge";
+import { getTimestampLabel } from "../../../utils";
 
 export interface IEvent {
   id: number;
@@ -89,7 +90,10 @@ export function EventHistory({
               {topEventsToRender.map((r) => (
                 <TableRow key={r.id}>
                   <TableCell component="th" scope="row">
-                    {r.event}
+                    <div>{r.event}</div>
+                    <div className="font-xs text-black/45">
+                      {getTimestampLabel(Number(r.timestamp))}
+                    </div>
                   </TableCell>
                   <TableCell align="right">{r.version}</TableCell>
                   <TableCell align="right">
