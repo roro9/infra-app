@@ -58,7 +58,7 @@ export function CpuView() {
 
   const series = useMemo(
     () => getSeriesData({ cpuData: cpuData || [], apps }),
-    [getSeriesData, cpuData, apps]
+    [cpuData, apps]
   );
 
   return (

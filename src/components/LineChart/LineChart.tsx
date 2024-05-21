@@ -72,7 +72,7 @@ export function LineChart({ titleText, series }: LineChartProps) {
         },
         headerFormat:
           '<div style="width: 150px; margin-bottom: 5px;"><span style="font-size: 1em; font-weight: 500;">{point.key}</span></div>',
-        pointFormat: `<span style="color:{point.color}">●</span> <span style="opacity: 0.7;">{series.name}</span> <span style="float: right; font-weight: 500;">{point.y}%</span><br/>`,
+        pointFormat: `<span style="color:{point.color}; font-size: 15px">●</span> <span style="opacity: 0.7;">{series.name}</span> <span style="float: right; font-weight: 500;">{point.y}%</span><br/>`,
         useHTML: true,
       },
     }),
