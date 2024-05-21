@@ -18,7 +18,7 @@ export function AppBar({ primary }: { primary?: ReactNode }) {
         "z-10"
       )}
     >
-      {primary}
+      <div>{primary}</div>
       <UserMenu user={TEST_USER} />
     </div>
   );
