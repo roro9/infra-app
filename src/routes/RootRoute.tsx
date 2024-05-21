@@ -25,7 +25,7 @@ export function RootRoute() {
     } else {
       return undefined;
     }
-  }, [pathname]);
+  }, [path]);
 
   useEffect(() => {
     if (pathname === RoutePath.ROOT) {
