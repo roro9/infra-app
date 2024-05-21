@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { ApplicationPageContent } from "../components/ApplicationPageContent";
 import { useAppState } from "../hooks";
 import React from "react";
@@ -9,7 +10,9 @@ export function ApplicationsRoute() {
   return (
     <div className="px-10">
       {!app ? (
-        <div>Select an app</div>
+        <Typography className="py-5" variant="h6">
+          Please select an app to continue
+        </Typography>
       ) : (
         <React.Fragment key={app.id}>
           <ApplicationPageContent app={app} />

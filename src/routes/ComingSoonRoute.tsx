@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { ALL_ROUTES_META } from "../constants";
 import React from "react";
+import { ComingSoonCard } from "../components/Cards";
 
 export function ComingSoonRoute() {
   const { pathname } = useLocation();
@@ -8,11 +9,8 @@ export function ComingSoonRoute() {
 
   console.log({ pathname });
   return (
-    <div>
-      {routeMeta && (
-        <span className="underline mr-1.5">{routeMeta.displayName}</span>
-      )}
-      <span>Coming soon</span>
+    <div className="mx-10 my-6">
+      <ComingSoonCard title={routeMeta?.displayName} />
     </div>
   );
 }

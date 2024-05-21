@@ -8,19 +8,21 @@ import React from "react";
 
 export function ApplicationPageView({
   pageView,
-  updatePageView,
+  setView,
   app,
 }: {
   pageView: View;
-  updatePageView: (newView: View) => void;
+  setView: (newView: View) => void;
   app: IApplication;
 }) {
+  const commonProps = {
+    app,
+    setView,
+  };
   return (
     <>
-      {pageView === "overview" && (
-        <Overview app={app} setView={updatePageView} />
-      )}
-      {pageView === "env" && <Environment app={app} />}
+      {pageView === "overview" && <Overview {...commonProps} />}
+      {pageView === "env" && <Environment {...commonProps} />}
       {pageView === "alerts" && <Alerts />}
       {pageView === "events" && <Events />}
     </>

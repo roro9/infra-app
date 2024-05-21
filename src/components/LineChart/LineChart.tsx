@@ -3,6 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 import { cloneDeep } from "lodash";
 import React, { useMemo } from "react";
 import { getLineChartTimestampLabel } from "../../utils";
+import { LineChartState } from "./LineChartState";
 
 export interface ILineChartSeries {
   name: string;
@@ -12,9 +13,16 @@ export interface ILineChartSeries {
 export interface LineChartProps {
   titleText: string;
   series: ILineChartSeries[];
+  error: boolean;
+  isLoading: boolean;
 }
 
-export function LineChart({ titleText, series }: LineChartProps) {
+export function LineChart({
+  titleText,
+  series,
+  error,
+  isLoading,
+}: LineChartProps) {
   const options = useMemo(
     (): Highcharts.Options => ({
       chart: {
@@ -79,11 +87,21 @@ export function LineChart({ titleText, series }: LineChartProps) {
     [series, titleText]
   );
 
+  // TODO - tooltip and x axis timestamps not matching....
+
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      key={JSON.stringify(options)}
-      options={options}
-    />
+    <>
+      {error ? (
+        <LineChartState type="error" />
+      ) : isLoading ? (
+        <LineChartState type="is-loading" />
+      ) : (
+        <HighchartsReact
+          highcharts={Highcharts}
+          key={JSON.stringify(options)}
+          options={options}
+        />
+      )}
+    </>
   );
 }

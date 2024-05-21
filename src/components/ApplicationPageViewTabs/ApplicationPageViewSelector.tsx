@@ -52,8 +52,6 @@ export function ApplicationPageViewSelector({
   value: View;
   setValue: (newValue: View) => void;
 }) {
-  console.log({ ALL_VIEWS });
-
   return (
     <Tabs
       value={value}

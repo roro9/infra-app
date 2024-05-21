@@ -12,13 +12,15 @@ export function ApplicationPageContent({ app }: { app: IApplication }) {
   return (
     <div className="my-1">
       <ApplicationPageContentHeader app={app} />
+
       <ApplicationPageViewSelector
         value={pageView}
         setValue={(newView) => setPageView(newView)}
       />
+
       <ApplicationPageView
         pageView={pageView}
-        updatePageView={(newView) => setPageView(newView)}
+        setView={(newView) => setPageView(newView)}
         app={app}
       />
     </div>

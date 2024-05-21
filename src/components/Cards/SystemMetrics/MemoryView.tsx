@@ -61,17 +61,12 @@ export function MemoryView() {
     [memoryData, apps]
   );
 
-  console.log({ series });
-
   return (
-    <div>
-      {error ? (
-        "Error"
-      ) : isPending ? (
-        "Loading..."
-      ) : (
-        <LineChart titleText="Memory Utilization (%)" series={series} />
-      )}
-    </div>
+    <LineChart
+      titleText="Memory Utilization (%)"
+      error={!!error}
+      isLoading={isPending}
+      series={series}
+    />
   );
 }

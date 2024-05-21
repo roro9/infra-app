@@ -16,6 +16,7 @@ export function UserMenu({ user }: { user: IUser }) {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
