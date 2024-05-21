@@ -1,5 +1,10 @@
 import React from "react";
+import { ComingSoonCard } from "../../Cards";
 
 export function Events() {
-  return <div>Events</div>;
+  return (
+    <div>
+      <ComingSoonCard title="Event History" />
+    </div>
+  );
 }

@@ -62,14 +62,11 @@ export function CpuView() {
   );
 
   return (
-    <div>
-      {error ? (
-        "Error"
-      ) : isPending ? (
-        "Loading..."
-      ) : (
-        <LineChart titleText="CPU Utilization (%)" series={series} />
-      )}
-    </div>
+    <LineChart
+      titleText="CPU Utilization (%)"
+      error={!!error}
+      isLoading={isPending}
+      series={series}
+    />
   );
 }

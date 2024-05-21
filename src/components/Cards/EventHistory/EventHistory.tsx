@@ -11,6 +11,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { Button } from "@mui/material";
 import { StatusBadge } from "../../StatusBadge";
 import { getTimestampLabel } from "../../../utils";
+import { EventHistoryState } from "./EventHistoryState";
 
 export interface IEvent {
   id: number;
@@ -40,22 +41,20 @@ export function EventHistory({
 
   const topEventsToRender = renderEvents.slice(0, 4);
 
-  console.log({ renderEvents });
-
   return (
     <BaseCard title="Event History">
       {error ? (
-        "Error"
+        <EventHistoryState type="error" />
       ) : isPending ? (
-        "Loading..."
+        <EventHistoryState type="is-loading" />
       ) : renderEvents.length === 0 ? (
-        "No events"
+        <EventHistoryState type="no-data" />
       ) : (
         <div>
           <Table
             sx={{
               [`& .${tableRowClasses.root}`]: {
-                height: 65,
+                height: 50,
               },
               [`& .${tableCellClasses.root}`]: {
                 borderColor: "#EBEBEB",

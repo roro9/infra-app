@@ -1,21 +1,26 @@
 import cx from "classnames";
 import { useEffect, useMemo } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { AppBar, ApplicationSelector, Sidebar } from "../components";
+import {
+  AppBar,
+  ApplicationSelector,
+  RouteState,
+  Sidebar,
+} from "../components";
 import { RoutePath } from "../constants";
 import { useRouteSetup } from "../hooks";
 import React from "react";
+import { useRoutePath } from "../hooks/useRoutePath";
 
 export function RootRoute() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
-  const data = true;
+  const path = useRoutePath();
 
   const { error, isPending } = useRouteSetup();
 
-  const appBarPrimaryControlToRender = useMemo((): undefined | JSX.Element => {
-    if (pathname.includes(RoutePath.APPLICATIONS)) {
+  const appBarRouteControl = useMemo((): undefined | JSX.Element => {
+    if (path === RoutePath.APPLICATIONS) {
       return <ApplicationSelector />;
     } else {
       return undefined;
@@ -34,14 +39,12 @@ export function RootRoute() {
       <div className="grow bg-primary-gray-page-bg">
         <div className="min-h-screen max-h-screen overflow-auto relative">
           {error ? (
-            <div>Error setting up</div>
+            <RouteState type="error" />
           ) : isPending ? (
-            <div> Loading </div>
-          ) : !data ? (
-            <div>No data available</div>
+            <RouteState type="loading" />
           ) : (
             <>
-              <AppBar primary={appBarPrimaryControlToRender} />
+              <AppBar primary={appBarRouteControl} />
               <Outlet />
             </>
           )}

@@ -20,7 +20,7 @@ export function ApplicationSelector() {
   // Sync application id in redux  statewith id in url
   // If not a valid id, navigate to /applications and clear redux state
   React.useEffect(() => {
-    if (id) {
+    if (id && options.length) {
       const numericId = Number(id);
       const validId = options.some((o) => o.id === numericId);
       if (validId) {

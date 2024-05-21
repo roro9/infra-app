@@ -32,8 +32,6 @@ export const useRouteSetup = () => {
     }
   }, [data, path, dispatch]);
 
-  // console.log({ data });
-
   return {
     error: !!error,
     isPending: isPending && !!queryPath,
