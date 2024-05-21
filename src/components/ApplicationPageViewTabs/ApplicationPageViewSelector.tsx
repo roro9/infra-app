@@ -64,7 +64,6 @@ export function ApplicationPageViewSelector({
         style: { display: "none" },
       }}
       textColor="inherit"
-      // className="h-[50px]"
     >
       {ALL_VIEWS.map((v) => (
         <Tab

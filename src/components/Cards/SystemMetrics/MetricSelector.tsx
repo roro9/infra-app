@@ -23,21 +23,36 @@ export function MetricSelector({
   value: View;
   setValue: (newValue: View) => void;
 }) {
-  console.log({ ALL_VIEWS });
-
   return (
-    <div>
-      <Tabs
-        value={value}
-        onChange={(e, newValue) => {
-          setValue(newValue);
-        }}
-        variant="fullWidth"
-      >
-        {ALL_VIEWS.map((v) => (
-          <Tab key={v.id} value={v.id} label={v.label} />
-        ))}
-      </Tabs>
-    </div>
+    <Tabs
+      value={value}
+      onChange={(e, newValue) => {
+        setValue(newValue);
+      }}
+      variant="fullWidth"
+      textColor="inherit"
+      TabIndicatorProps={{
+        style: {
+          backgroundColor: "#6E27D5",
+        },
+      }}
+      sx={{
+        ".Mui-selected": {
+          color: `#6E27D5`,
+        },
+        borderBottom: "1px solid #BDBDBD",
+      }}
+    >
+      {ALL_VIEWS.map((v) => (
+        <Tab
+          key={v.id}
+          value={v.id}
+          label={v.label}
+          sx={{
+            textTransform: "none",
+          }}
+        />
+      ))}
+    </Tabs>
   );
 }
