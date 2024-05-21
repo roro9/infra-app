@@ -16,6 +16,7 @@ module.exports = {
             "page-bg": "#F8F8F8",
             border: "#EBEBEB",
             timesstamp: "#595959",
+            "file-upload": "#BDBDBD",
           },
           green: {
             DEFAULT: "#00B88C",

@@ -3,8 +3,11 @@ import { IApplication } from "../../../redux/slices/applicationsSlice";
 import { BaseCard } from "../../Cards/BaseCard";
 import { AppDrawer } from "../../AppDrawer";
 import { useDropzone } from "react-dropzone";
-import { EnvVariablesList } from "./EnvVariablesList";
+import { EnvVariablesManager } from "./EnvVariablesManager";
 import { cloneDeep } from "lodash";
+import { Button, IconButton } from "@mui/material";
+import { AddIcon, DownloadIcon, UploadIcon } from "../../../icons";
+import cx from "classnames";
 
 const initEnvVariablesForApp = ({
   appId,
@@ -48,36 +51,37 @@ export function Environment({ app }: { app: IApplication }) {
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      ".env": [".env"], //TODO - check if this work
+      file: [".env"], //TODO - check if this work
     },
-    multiple: false,
+    multiple: true,
+    maxSize: 5000, // Size in bytes (5KB = 5000 bytes)
     onDrop: (acceptedFiles) => {
       console.log({ acceptedFiles });
-      const file = acceptedFiles?.[0];
-      console.log({ file });
-      if (file) {
+      if (acceptedFiles.length) {
         try {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const content = String(reader.result);
-            const lines = content.split("\n");
+          acceptedFiles.forEach((file) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const content = String(reader.result);
+              const lines = content.split("\n");
 
-            const result: { name: string; value: string }[] = [];
-            lines.forEach((line) => {
-              const trimmedLine = line.trim();
-              if (trimmedLine && !trimmedLine.startsWith("#")) {
-                const [name, value] = trimmedLine.split("=");
-                result.push({ name: name.trim(), value: value.trim() });
-              }
-            }, []);
+              const result: { name: string; value: string }[] = [];
+              lines.forEach((line) => {
+                const trimmedLine = line.trim();
+                if (trimmedLine && !trimmedLine.startsWith("#")) {
+                  const [name, value] = trimmedLine.split("=");
+                  result.push({ name: name.trim(), value: value.trim() });
+                }
+              }, []);
 
-            setEnvVariablesFromFile(result);
-          };
-          reader.onerror = () => {
-            console.log("error reading file...");
-          };
+              setEnvVariablesFromFile((prev) => [...prev, ...result]);
+            };
+            reader.onerror = () => {
+              console.log("error reading file...");
+            };
 
-          reader.readAsText(file);
+            reader.readAsText(file);
+          });
         } catch (e) {
           console.log("errrrrorrrrrr");
         }
@@ -104,65 +108,98 @@ export function Environment({ app }: { app: IApplication }) {
       <BaseCard
         title="Environment variables"
         titleRight={
-          <div className="flex items-center gap-5">
-            <button onClick={() => setOpen(true)}>+</button>
-            {envVariables.length > 0 && (
-              <button
-                onClick={() => {
-                  try {
-                    const envContent = envVariables
-                      .map(({ name, value }) => `${name}=${value}`)
-                      .join("\n");
-                    // Create Blob and File objects
-                    const blob = new Blob([envContent], { type: "text/plain" });
-                    const file = new File([blob], "download.env", {
-                      type: "text/plain",
-                    });
+          <div className="flex items-center gap-2">
+            <IconButton onClick={() => setOpen(true)}>
+              <AddIcon />
+            </IconButton>
 
-                    // Create a download link and trigger the download
-                    const a = document.createElement("a");
-                    a.href = URL.createObjectURL(file);
-                    a.download = "example.env";
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                  } catch (e) {
-                    console.log("failed to download file", e);
-                  }
-                }}
-              >
-                Dwld
-              </button>
-            )}
+            <IconButton
+              disabled={envVariables.length === 0}
+              onClick={() => {
+                try {
+                  const envContent = envVariables
+                    .map(({ name, value }) => `${name}=${value}`)
+                    .join("\n");
+                  // Create Blob and File objects
+                  const blob = new Blob([envContent], { type: "text/plain" });
+                  const file = new File([blob], "download.env", {
+                    type: "text/plain",
+                  });
+
+                  // Create a download link and trigger the download
+                  const a = document.createElement("a");
+                  a.href = URL.createObjectURL(file);
+                  a.download = "example.env";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                } catch (e) {
+                  console.log("failed to download file", e);
+                }
+              }}
+            >
+              <DownloadIcon />
+            </IconButton>
           </div>
         }
+        className="min-h-[350px]"
       >
-        <EnvVariablesList
-          variables={envVariables}
-          handleDeleteVariable={(deleteIdx) => {
-            setEnvVariables((prev) => {
-              const newVariables = cloneDeep(prev).filter(
-                (v, idx) => idx !== deleteIdx
-              );
+        {envVariables.length === 0 ? (
+          <div className="text-primary-gray-timesstamp text-sm	font-medium	">
+            No environment variable created.
+          </div>
+        ) : (
+          <div className="max-w-[650px]">
+            <EnvVariablesManager
+              type="page"
+              variables={envVariables}
+              handleDeleteVariable={(deleteIdx) => {
+                setEnvVariables((prev) => {
+                  const newVariables = cloneDeep(prev).filter(
+                    (v, idx) => idx !== deleteIdx
+                  );
 
-              return newVariables;
-            });
-          }}
-        />
+                  return newVariables;
+                });
+              }}
+            />
+          </div>
+        )}
       </BaseCard>
       <AppDrawer open={open} handleClose={() => setOpen(false)}>
-        {envVariablesFromFile.length === 0 ? (
-          <BaseCard>
-            <section className="container">
-              <div {...getRootProps({ className: "dropzone" })}>
+        <BaseCard>
+          {envVariablesFromFile.length === 0 ? (
+            <section className={cx("container", "")}>
+              <div
+                {...getRootProps({
+                  className: cx(
+                    "dropzone",
+                    "flex flex-col justify-center items-center",
+                    "gap-2",
+                    "bg-primary-gray-page-bg",
+                    "px-5 py-8",
+                    "border border-dashed border-primary-gray-file-upload",
+                    "rounded-lg",
+                    "cursor-pointer",
+                    "hover:border-black"
+                  ),
+                })}
+              >
                 <input {...getInputProps()} accept=".env" />
-                <p>Drag file here, or click to select</p>
+                <div className="text-primary-purple-sidebar-beta-tag-bg">
+                  <UploadIcon />
+                </div>
+                <p className="font-semibold text-sm text-[#333333]">
+                  Click or drag file(s) here to upload
+                </p>
+              </div>
+              <div className="font-medium text-xs text-primary-gray-timesstamp mt-1.5">
+                Upload a .env file. It should not be greater than 5KB.
               </div>
             </section>
-          </BaseCard>
-        ) : (
-          <div>
-            <EnvVariablesList
+          ) : (
+            <EnvVariablesManager
+              type="drawer"
               variables={envVariablesFromFile}
               handleDeleteVariable={(deleteIdx) => {
                 setEnvVariablesFromFile((prev) => {
@@ -174,18 +211,39 @@ export function Environment({ app }: { app: IApplication }) {
                 });
               }}
             />
-
-            <button onClick={() => setOpen(false)}>Cancel</button>
-            <button
+          )}
+          <div className="mt-8 flex justify-end items-center gap-4">
+            <Button
+              onClick={() => setOpen(false)}
+              variant="outlined"
+              sx={{
+                textTransform: "none",
+                px: 4,
+                borderColor: "black",
+                fontWeight: 600,
+                color: "black",
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                background: "#6E27D5",
+                textTransform: "none",
+                px: 4,
+                fontWeight: 600,
+              }}
+              disabled={envVariablesFromFile.length === 0}
               onClick={() => {
                 setEnvVariables((prev) => [...prev, ...envVariablesFromFile]);
                 setOpen(false);
               }}
             >
               Add
-            </button>
+            </Button>
           </div>
-        )}
+        </BaseCard>
       </AppDrawer>
     </>
   );
