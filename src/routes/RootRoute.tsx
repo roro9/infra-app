@@ -1,14 +1,9 @@
 import cx from "classnames";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import {
-  AppBar,
-  ApplicationSelector,
-  RouteState,
-  Sidebar,
-} from "../components";
+import { AppBar, RouteState, Sidebar } from "../components";
 import { RoutePath } from "../constants";
-import { useRouteSetup } from "../hooks";
+import { useAppBarControlForRoute, useRouteSetup } from "../hooks";
 import React from "react";
 import { useRoutePath } from "../hooks/useRoutePath";
 
@@ -19,14 +14,12 @@ export function RootRoute() {
 
   const { error, isPending } = useRouteSetup();
 
-  const appBarRouteControl = useMemo((): undefined | JSX.Element => {
-    if (path === RoutePath.APPLICATIONS) {
-      return <ApplicationSelector />;
-    } else {
-      return undefined;
-    }
-  }, [path]);
+  // route specific app bar control
+  const appBarControlForRoute = useAppBarControlForRoute({
+    currentRoutePath: path,
+  });
 
+  // redirect to /applications when landing on root path
   useEffect(() => {
     if (pathname === RoutePath.ROOT) {
       navigate(RoutePath.APPLICATIONS);
@@ -44,7 +37,7 @@ export function RootRoute() {
             <RouteState type="loading" />
           ) : (
             <>
-              <AppBar primary={appBarRouteControl} />
+              <AppBar primary={appBarControlForRoute} />
               <Outlet />
             </>
           )}

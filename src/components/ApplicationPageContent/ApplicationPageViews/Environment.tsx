@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { IApplication } from "../../../redux/slices/applicationsSlice";
 import { BaseCard } from "../../Cards/BaseCard";
 import { AppDrawer } from "../../AppDrawer";
 import { useDropzone } from "react-dropzone";
@@ -8,6 +7,7 @@ import { cloneDeep } from "lodash";
 import { Button, IconButton } from "@mui/material";
 import { AddIcon, DownloadIcon, UploadIcon } from "../../../icons";
 import cx from "classnames";
+import { IApplication } from "../../../interfaces";
 
 const initEnvVariablesForApp = ({
   appId,

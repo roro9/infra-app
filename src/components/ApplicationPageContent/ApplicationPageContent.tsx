@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { IApplication } from "../../redux/slices/applicationsSlice";
 import { ApplicationPageViewSelector } from "../ApplicationPageViewTabs";
-import { View } from "../ApplicationPageViewTabs/ApplicationPageViewSelector";
 import React from "react";
 import { ApplicationPageContentHeader } from "./ApplicationPageContentHeader";
-import { ApplicationPageView } from "./ApplicationPageViews";
+import { ApplicationPageView, IApplication } from "../../interfaces";
+import { ApplicationPageViewContent } from "./ApplicationPageViews";
 
 export function ApplicationPageContent({ app }: { app: IApplication }) {
-  const [pageView, setPageView] = useState<View>("overview");
+  const [pageView, setPageView] = useState<ApplicationPageView>("overview");
 
   return (
     <div className="my-1">
@@ -18,7 +17,7 @@ export function ApplicationPageContent({ app }: { app: IApplication }) {
         setValue={(newView) => setPageView(newView)}
       />
 
-      <ApplicationPageView
+      <ApplicationPageViewContent
         pageView={pageView}
         setView={(newView) => setPageView(newView)}
         app={app}

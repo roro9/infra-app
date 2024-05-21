@@ -1,1 +1,1 @@
-export { ApplicationPageView } from "./ApplicationPageView";
+export { ApplicationPageViewContent } from "./ApplicationPageViewContent";

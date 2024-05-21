@@ -1,5 +1,5 @@
 import { CheckIcon } from "../../../icons";
-import { IApplication } from "../../../redux/slices/applicationsSlice";
+import { IApplication } from "../../../interfaces";
 import { LabelWrapper } from "../../LabelWrapper";
 import React from "react";
 

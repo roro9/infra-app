@@ -1,13 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface IApplication {
-  id: number;
-  name: string;
-  status: "deployed" | "uninstalled";
-  version: string;
-  updatedAt: `${EpochTimeStamp}`;
-  desiredVersion: string;
-}
+import { IApplication } from "../../interfaces";
 
 type IApplicationsState = IApplication[];
 
@@ -17,7 +9,7 @@ export const applicationsSlice = createSlice({
   name: "applicationsSlice",
   initialState,
   reducers: {
-    updateApplications: (state, action: PayloadAction<IApplicationsState>) => {
+    updateApplications: (_state, action: PayloadAction<IApplicationsState>) => {
       return [...action.payload];
     },
   },
