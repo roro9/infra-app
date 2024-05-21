@@ -6,12 +6,15 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import TableRow, { tableRowClasses } from "@mui/material/TableRow";
+import { tableCellClasses } from "@mui/material/TableCell";
+import { Button } from "@mui/material";
+import { StatusBadge } from "../../StatusBadge";
 
-interface IEvent {
+export interface IEvent {
   id: number;
   event: string;
-  status: string;
+  status: "successful" | "failed" | "inprogress";
   version: string;
   timestamp: string;
   applicationId: string;
@@ -48,12 +51,38 @@ export function EventHistory({
         "No events"
       ) : (
         <div>
-          <Table>
+          <Table
+            sx={{
+              [`& .${tableRowClasses.root}`]: {
+                height: 65,
+              },
+              [`& .${tableCellClasses.root}`]: {
+                borderColor: "#EBEBEB",
+                color: "#595959",
+                fontSize: 13,
+                fontWeight: 500,
+              },
+            }}
+          >
             <TableHead>
               <TableRow>
-                <TableCell>Event</TableCell>
-                <TableCell>Version</TableCell>
-                <TableCell align="right">Status</TableCell>
+                <TableCell
+                  sx={{ fontWeight: `700 !important`, pt: "6px !important" }}
+                >
+                  Event
+                </TableCell>
+                <TableCell
+                  align="right"
+                  sx={{ fontWeight: `700 !important`, pt: "6px !important" }}
+                >
+                  Version
+                </TableCell>
+                <TableCell
+                  align="right"
+                  sx={{ fontWeight: `700 !important`, pt: "6px !important" }}
+                >
+                  Status
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -62,16 +91,23 @@ export function EventHistory({
                   <TableCell component="th" scope="row">
                     {r.event}
                   </TableCell>
-                  <TableCell>{r.version}</TableCell>
-                  <TableCell align="right">{r.status}</TableCell>
+                  <TableCell align="right">{r.version}</TableCell>
+                  <TableCell align="right">
+                    <StatusBadge status={r.status} />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
+
           {topEventsToRender.length < renderEvents.length && (
-            <button className="mt-8 inline-block" onClick={switchToEventsView}>
+            <Button
+              sx={{ textTransform: "none", mt: 4, textDecoration: "underline" }}
+              variant="text"
+              onClick={switchToEventsView}
+            >
               View More
-            </button>
+            </Button>
           )}
         </div>
       )}

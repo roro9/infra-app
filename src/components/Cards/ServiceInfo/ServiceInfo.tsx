@@ -19,7 +19,7 @@ export function ServiceInfo({ app }: { app: IApplication }) {
         <Button
           variant="contained"
           disableElevation
-          sx={{ background: "#6E27D5" }}
+          sx={{ background: "#6E27D5", textTransform: "none", px: 4 }}
         >
           Deploy
         </Button>

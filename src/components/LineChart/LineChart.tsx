@@ -46,7 +46,6 @@ export function LineChart({ titleText, series }: LineChartProps) {
             opacity: 0.75,
           },
           formatter: (e) => {
-            console.log({ e });
             return getLineChartTimestampLabel(Number(e.value));
           },
         },
@@ -66,6 +65,15 @@ export function LineChart({ titleText, series }: LineChartProps) {
           text: "",
         },
         gridLineColor: "#F8F8F8",
+      },
+      tooltip: {
+        dateTimeLabelFormats: {
+          millisecond: "%e %b %l:%M %p",
+        },
+        headerFormat:
+          '<div style="width: 150px; margin-bottom: 5px;"><span style="font-size: 1em; font-weight: 500;">{point.key}</span></div>',
+        pointFormat: `<span style="color:{point.color}">●</span> <span style="opacity: 0.7;">{series.name}</span> <span style="float: right; font-weight: 500;">{point.y}%</span><br/>`,
+        useHTML: true,
       },
     }),
     [series, titleText]
